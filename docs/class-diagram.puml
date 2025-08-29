@@ -1,2 +1,30 @@
 @startuml
+package "ACME.OOP.Shared" as Shared {
+    class "Address" as Address {
+        +Street: string { readonly }
+        +Number: string { readonly }
+        +City: string { readonly }
+        +StateOrRegion: string? { readonly }
+        +PostalCode: string { readonly }
+        +Country: string { readonly }
+    }
+    
+    class "Money" as Money {
+        +Amount: decimal { readonly }
+        +Currency: string { readonly }
+    }
+}
+
+package "ACME.OOP.SCM" as SCM {
+    class "SupplierId" as SupplierId {
+        +Identifier: string { readonly }
+    }
+    class "Supplier" as Supplier {
+        +Id: SupplierId { readonly }
+        +Name: string { readonly }
+        +Address: Address { readonly }
+    }
+    Supplier "1" -- "1" Address : has >
+    Supplier "1" -- "1" SupplierId : identified by >
+}
 @enduml
